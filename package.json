@@ -15,6 +15,7 @@
     "typescript": "^4.7.4"
   },
   "scripts": {
+    "build": "tsc -p .",
     "test": "jest",
     "dev": "ts-node server/index.ts"
   },
