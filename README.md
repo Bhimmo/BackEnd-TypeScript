@@ -1,8 +1,19 @@
-## Comandos utilizados
-- yarn init
-- yarn add typescript -D
-- npx tsc --init
-- npx jest --init
-- yarn add @swc/jest @swc/core -D
-- yarn add jest @types/jest -D
-- yarn add ts-node -D
+# Como rodar o projeto
+Primeiramente abrir o terminal e digitar os seguintes comandos:
+
+Para atualizar as dependencias:
+```
+> yarn install
+```
+
+Para iniciar:
+```
+> yarn dev
+```
+
+⚙ Assim o servidor ira inicializar ⚙ 
+
+Para acessar usar: 
+```
+> http://localhost:3000 
+```
