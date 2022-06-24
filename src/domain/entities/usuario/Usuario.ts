@@ -6,7 +6,7 @@ export type PropsUser = {
 
 export default class Usuario {
     private id?: string;
-    private propsUser: PropsUser;
+    public propsUser: PropsUser;
 
     constructor(propsUser: PropsUser) {
         this.propsUser = propsUser;
