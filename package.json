@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc -p .",
     "test": "jest",
-    "dev": "ts-node server/index.ts"
+    "dev": "ts-node src/server/index.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
