@@ -11,19 +11,19 @@ describe('testes in memory', ()=> {
     
     it('create', async () => {
         let usuario = new Usuario(props);
-        await repositoryInMemory.inserir(usuario);
-
+        
+        await repositoryInMemory.inserir(usuario.toJSON());
+        
         expect(repositoryInMemory.items).toHaveLength(1);
-        expect(repositoryInMemory.items).toStrictEqual([usuario]);
+        expect(repositoryInMemory.items[0]).toHaveProperty("id");
     })
 
     it('findAll', ( )=> {
         repositoryInMemory.items.forEach((item)=> {
-            let props = item.getPropsUser;
-            expect(props).toHaveProperty("nome");
-            expect(props).toHaveProperty("email");
-            expect(props).toHaveProperty("senha");
-            expect(props).toStrictEqual(props);
+            expect(item).toHaveProperty("id");
+            expect(item).toHaveProperty("nome");
+            expect(item).toHaveProperty("email");
+            expect(item).toHaveProperty("senha");
         })
     })
 })

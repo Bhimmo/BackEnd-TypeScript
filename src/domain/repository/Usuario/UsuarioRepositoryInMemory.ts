@@ -1,13 +1,14 @@
 import Usuario from "../../entities/usuario/Usuario";
-import usuarioInterface from "../../entities/usuario/usuarioInterface";
+import usuarioInterface, { propsUsuario } from "../../entities/usuario/usuarioInterface";
 
 export default class UsuarioRepositoryInMemory implements usuarioInterface {
-    items: Usuario[] = [];
-    async inserir(user: Usuario): Promise<void> {
+    items: propsUsuario[] = [];
+    async inserir(user: propsUsuario): Promise<void> {
         this.items.push(user);
+        //return user;
     }
 
-    async pegarTodos(): Promise<Usuario[]> {
+    async pegarTodos(): Promise<propsUsuario[]> {
         return this.items;
     }
 }
