@@ -1,15 +1,32 @@
 import mongoose, { Schema } from "mongoose";
-import UsuarioModel from "./UsuarioInterface";
 
-const UsuarioSchema: Schema = new Schema(
-    {
-        nome: { type: String, required: true },
-        email: { type: String, required: true },
-        senha: { type: String, required: true }
+const UsuarioSchema: Schema = new Schema({
+    _id: {
+        type: String,
+        required: true
     },
-    {
-        timestamps: true
+    nome: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    senha: {
+        type: String,
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        required: false,
+        default: new Date()
+    },
+    updatedAt: {
+        type: Date,
+        required: false,
+        default: new Date()
     }
-);
+})
 
-export default mongoose.model<UsuarioModel>('Usuario', UsuarioSchema);
+export default mongoose.model('Usuario', UsuarioSchema);
