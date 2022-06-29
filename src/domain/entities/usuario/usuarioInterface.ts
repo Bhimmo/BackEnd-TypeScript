@@ -10,4 +10,5 @@ export type propsUsuario = {
 export default interface usuarioInterface {
     inserir(user: propsUsuario): Promise<void>
     pegarTodos(): Promise<propsUsuario[]>
+    deletar(id: string): Promise<void>
 }

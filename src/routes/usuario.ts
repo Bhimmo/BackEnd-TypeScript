@@ -4,6 +4,7 @@ import UsuarioRepositoryInDB from "../domain/repository/Usuario/UsuarioRepositor
 
 import FindAllUsuarioUseCase from "../domain/useCase/usuario/findAll-usuario.use-case";
 import CreateUsuarioUseCase from "../domain/useCase/usuario/create-usuario.use-case";
+import DeleteUsuarioUseCase from "../domain/useCase/usuario/delete-usuario.use-case";
 
 const userRepo = new UsuarioRepositoryInDB();
 
@@ -20,6 +21,14 @@ router.post('/', async (req: Request, res: Response) => {
     const result = await userUseCase.execute({nome, email, senha});
 
     res.status(201).json(result);
+})
+
+router.delete('/:id', async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const userUseCase = new DeleteUsuarioUseCase(userRepo);
+    await userUseCase.execute(id);
+
+    res.status(204).json();
 })
 
 export default router;

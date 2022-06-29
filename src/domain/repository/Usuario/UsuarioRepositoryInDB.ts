@@ -18,4 +18,8 @@ export default class UsuarioRepositoryInDB implements usuarioInterface {
     async pegarTodos(): Promise<propsUsuario[]> {
         return UsuarioSchema.find();
     }
+
+    async deletar(id: string) {
+        await UsuarioSchema.deleteOne({id});
+    }
 }
