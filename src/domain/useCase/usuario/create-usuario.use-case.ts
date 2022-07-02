@@ -5,6 +5,10 @@ type CreateInput = {
     nome: string,
     email: string,
     senha: string,
+    tipo: {
+        "id": string,
+        "descricao": string
+    },
     createdAt?: string,
     updatedAt?: string
 }

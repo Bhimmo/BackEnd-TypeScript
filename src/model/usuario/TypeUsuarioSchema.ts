@@ -1,14 +1,13 @@
 import mongoose, { Schema } from "mongoose";
 
-const TipoUsuarioSchema: Schema = new Schema({
-    _id: {
-        type: String,
-        required: true
-    },
-    descricao: {
-        type: String,
-        required: true
-    },
+const reqString = {
+    type: String,
+    required: true
+}
+
+export default new Schema({
+    _id: reqString,
+    descricao: reqString,
     createdAt: {
         type: Date,
         required: false,
@@ -20,5 +19,3 @@ const TipoUsuarioSchema: Schema = new Schema({
         default: new Date()
     }
 })
-
-export default mongoose.model('TipoUsuario', TipoUsuarioSchema);
