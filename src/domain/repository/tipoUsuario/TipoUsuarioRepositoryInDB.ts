@@ -19,9 +19,12 @@ export default class TipoUsuarioRepositoryInDB implements tipoUsuarioInterface {
     async pegarUm(id: string): Promise<propsTipoUsuario> {
         return Schemma
             .findById(id)
-            .then((res: any) => {
-                console.log(res);
-                return res
-            })
+            .then((res: any) => res)
+    }
+
+    async deletar(id: string): Promise<void> {
+        return Schemma
+            .findByIdAndDelete(id)
+            .then((res: any) => res)
     }
 }
