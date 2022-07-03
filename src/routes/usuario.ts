@@ -17,9 +17,9 @@ router.get('/', async (req: Request, res: Response) => {
 })
 
 router.post('/', async (req: Request, res: Response) => {
-    let { nome, email, senha, tipo } = req.body;
+    let { nome, email, senha, tipoId } = req.body;
     const userUseCase = new CreateUsuarioUseCase(userRepo);
-    const result = await userUseCase.execute({nome, email, senha, tipo});
+    const result = await userUseCase.execute({nome, email, senha, tipoId});
 
     res.status(201).json(result);
 })

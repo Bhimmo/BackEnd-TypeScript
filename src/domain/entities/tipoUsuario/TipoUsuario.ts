@@ -1,24 +1,22 @@
 import crypto from "crypto";
 
-type TipoProps = {
-    descricao: string,
-    createdAt?: Date,
-    updatedAt?: Date
-}
-
 export default class TipoUsuario {
-    public id: string;
-    public tipoProps: TipoProps;
+    private id: string;
+    private descricao: string;
 
-    constructor(tipoProps: TipoProps, id?: string) {
-        this.tipoProps = tipoProps;
+    constructor(
+        descricao: string,
+        id?: string
+    ) {
+        this.descricao = descricao;
         this.id = id || crypto.randomUUID();
     }
 
-    toJSON() {
-        return {
-            id: this.id,
-            ...this.tipoProps
-        }
+    get getId(): string {
+        return this.id;
+    }
+
+    get getDescricao(): string {
+        return this.descricao;
     }
 }

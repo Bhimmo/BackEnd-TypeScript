@@ -7,9 +7,7 @@ export type PropsUser = {
     tipo: {
         "id": string,
         "descricao": string
-    },
-    createdAt?: string,
-    updatedAt?: string
+    }
 }
 
 export default class Usuario {

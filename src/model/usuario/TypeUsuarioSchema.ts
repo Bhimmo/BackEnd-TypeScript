@@ -7,15 +7,5 @@ const reqString = {
 
 export default new Schema({
     _id: reqString,
-    descricao: reqString,
-    createdAt: {
-        type: Date,
-        required: false,
-        default: new Date()
-    },
-    updatedAt: {
-        type: Date,
-        required: false,
-        default: new Date()
-    }
+    descricao: reqString
 })
