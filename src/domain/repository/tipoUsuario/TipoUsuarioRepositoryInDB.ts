@@ -27,4 +27,16 @@ export default class TipoUsuarioRepositoryInDB implements tipoUsuarioInterface {
             .findByIdAndDelete(id)
             .then((res: any) => res)
     }
+
+    async atualizar(id: string, descricao: string): Promise<void> {
+        return Schemma
+            .findByIdAndUpdate({
+                _id: id
+            }, {
+                $set: {
+                    descricao: descricao
+                }
+            })
+            .then((res: any) => res)
+    }
 }

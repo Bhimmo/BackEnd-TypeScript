@@ -5,6 +5,7 @@ import FindAllTiposUsuarioUseCase from "../domain/useCase/tipoUsuario/findAll-ti
 import FindOneTiposUsuarioUseCase from "../domain/useCase/tipoUsuario/findOne-tipoUsuario.use-case";
 import CreateTiposUsuarioUseCase from "../domain/useCase/tipoUsuario/create-tipoUsuario.use-case";
 import DeleteTiposUsuarioUseCase from "../domain/useCase/tipoUsuario/delete-tipoUsuario.use-case";
+import UpdateTiposUsuarioUseCase from "../domain/useCase/tipoUsuario/update-tipoUsuario.use-case";
 
 const tipoRepo = new TipoUsuarioRepositoryInDB();
 
@@ -55,6 +56,26 @@ router.delete('/:id', async(req: Request, res: Response) => {
         res.status(500).json({
             Error: e.message
         });
+    }
+})
+
+router.patch('/:id', async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { descricao } = req.body;
+
+    if (!id || !descricao) {
+        res.status(500).json({Error: "dados inválidos"});
+    }
+
+    try {
+        const tipoUseCase = new UpdateTiposUsuarioUseCase(tipoRepo);
+        const result = await tipoUseCase.execute(id, descricao);
+    
+        res.status(200).json(result);
+    } catch (e: any) {
+        res.status(500).json({
+            Error: e.message
+        })
     }
 })
 export default router;
