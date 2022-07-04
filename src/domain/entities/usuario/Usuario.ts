@@ -5,7 +5,10 @@ export default class Usuario {
         public nome: string,
         public email: string,
         public senha: string,
-        public tipo: string,
+        public tipo: {
+            id: string,
+            descricao: string
+        },
         public readonly id?: string
     ) {
         this.id = id || crypto.randomUUID();
@@ -27,7 +30,11 @@ export default class Usuario {
         return this.senha;
     }
 
-    get getTipo() {
-        return this.tipo;
+    get getTipoId() {
+        return this.tipo.id;
+    }
+
+    get getTipoDescricao() {
+        return this.tipo.descricao;
     }
 }

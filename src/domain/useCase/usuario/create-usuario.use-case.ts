@@ -20,7 +20,11 @@ export default class CreateUsuarioUseCase {
             throw new Error("Tipo nao encontrado");
         }
 
-        const usuario = new Usuario(props.nome, props.email, props.senha, tipoInBD.descricao);
+        const usuario = new Usuario(
+            props.nome, props.email, props.senha, { 
+                id: tipoInBD.id,
+                descricao: tipoInBD.descricao
+            });
         return this.userRepo.inserir(usuario);
     }
 }

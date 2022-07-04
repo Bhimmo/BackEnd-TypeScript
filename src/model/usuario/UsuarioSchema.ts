@@ -1,4 +1,5 @@
 import { Schema } from "mongoose";
+import TypeUsuarioSchema from "./TypeUsuarioSchema";
 
 const reqString = {
     type: String,
@@ -10,7 +11,7 @@ export default new Schema({
     nome: reqString,
     email: reqString,
     senha: reqString,
-    tipo: reqString,
+    tipo: TypeUsuarioSchema,
     createdAt: {
         type: Date,
         required: false,
