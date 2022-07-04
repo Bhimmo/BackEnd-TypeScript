@@ -1,24 +1,20 @@
 import mongoose from "mongoose";
 import UsuarioSchema from "../../../model/usuario/UsuarioSchema";
+import Usuario from "../../entities/usuario/Usuario";
 import usuarioInterface, { propsUsuario } from "../../entities/usuario/usuarioInterface";
 
 const Schema = mongoose.model('Usuario', UsuarioSchema);
 
 export default class UsuarioRepositoryInDB implements usuarioInterface {
-    async inserir(user: propsUsuario): Promise<void> {
+    async inserir(user: Usuario): Promise<void> {
         return new Schema({
-            _id: user.id,
-            nome: user.nome,
-            email: user.email,
-            senha: user.senha,
-            tipo: {
-                _id: user.tipo.id,
-                descricao: user.tipo.descricao
-            },
+            _id: user.getId,
+            nome: user.getNome,
+            email: user.getEmail,
+            senha: user.getSenha,
+            tipo: user.getTipo,
             createdAt: new Date()
-        })
-        .save()
-        .then((res: any) => res)
+        }).save().then((res: any) => res)
     }
     async pegarTodos(): Promise<propsUsuario[]> {
         return Schema.find();
@@ -28,10 +24,10 @@ export default class UsuarioRepositoryInDB implements usuarioInterface {
         await Schema.deleteOne({id});
     }
 
-    async atualizar(id: string, props: any): Promise<void> {
-        return Schema
+    async atualizar(user: Usuario): Promise<void> {
+        /* return Schema
             .findByIdAndUpdate(id, props)
-            .then((res: any) => res)
+            .then((res: any) => res) */
     }
 
     async pegarUm(id: string): Promise<propsUsuario> {

@@ -18,10 +18,19 @@ router.get('/', async (req: Request, res: Response) => {
 
 router.post('/', async (req: Request, res: Response) => {
     let { nome, email, senha, tipoId } = req.body;
-    const userUseCase = new CreateUsuarioUseCase(userRepo);
-    const result = await userUseCase.execute({nome, email, senha, tipoId});
 
-    res.status(201).json(result);
+    if (!nome || !email || !senha || !tipoId) {
+        res.status(500).json({Error: "dados inválidos"});
+    }
+
+    try {
+        const userUseCase = new CreateUsuarioUseCase(userRepo);
+        const result = await userUseCase.execute({nome, email, senha, tipoId});
+    
+        res.status(201).json(result);
+    } catch (e: any) {
+        res.status(500).json({Error: e.message})
+    }
 })
 
 router.delete('/:id', async (req: Request, res: Response) => {

@@ -1,6 +1,6 @@
 import Usuario from "../../entities/usuario/Usuario";
-import usuarioInterface from "../../entities/usuario/usuarioInterface";
 import tipoRepositoryInDB from "../../repository/tipoUsuario/TipoUsuarioRepositoryInDB";
+import UsuarioRepositoryInDB from "../../repository/Usuario/UsuarioRepositoryInDB";
 
 type CreateInput = {
     nome: string,
@@ -10,18 +10,17 @@ type CreateInput = {
 }
 
 export default class CreateUsuarioUseCase {
-    constructor(private userRepo: usuarioInterface) {}
+    constructor(private userRepo: UsuarioRepositoryInDB) {}
 
     async execute(props: CreateInput) {
         const tipoRepo = new tipoRepositoryInDB();
         let tipoInBD = await tipoRepo.pegarUm(props.tipoId);
-        console.log(tipoInBD);
         
-        if (!tipoInBD || tipoInBD == null) {
-            new Error("Tipo nao encontrado");
+        if (!tipoInBD) {
+            throw new Error("Tipo nao encontrado");
         }
 
-        //const usuario = new Usuario(props);
-        //return this.userRepo.inserir(usuario.toJSON());
+        const usuario = new Usuario(props.nome, props.email, props.senha, tipoInBD.descricao);
+        return this.userRepo.inserir(usuario);
     }
 }

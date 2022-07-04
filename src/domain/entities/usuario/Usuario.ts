@@ -1,21 +1,13 @@
 import crypto from 'crypto';
 
-export type PropsUser = {
-    nome: string,
-    email: string,
-    senha: string,
-    tipo: {
-        "id": string,
-        "descricao": string
-    }
-}
-
 export default class Usuario {
-    public readonly id: string;
-    public propsUser: PropsUser;
-
-    constructor(propsUser: PropsUser, id?: string) {
-        this.propsUser = propsUser;
+    constructor(
+        public nome: string,
+        public email: string,
+        public senha: string,
+        public tipo: string,
+        public readonly id?: string
+    ) {
         this.id = id || crypto.randomUUID();
     }
 
@@ -23,14 +15,19 @@ export default class Usuario {
         return this.id;
     }
 
-    get getPropsUser() {
-        return this.propsUser;
+    get getNome() {
+        return this.nome;
     }
 
-    toJSON() {
-        return {
-            id: this.id,
-            ...this.propsUser
-        }
+    get getEmail() {
+        return this.email;
+    }
+
+    get getSenha() {
+        return this.senha;
+    }
+
+    get getTipo() {
+        return this.tipo;
     }
 }
