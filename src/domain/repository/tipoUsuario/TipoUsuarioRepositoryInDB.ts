@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import TypeUsuarioSchema from "../../../model/usuario/TypeUsuarioSchema";
+import TypeUsuarioSchema from "../../../model/TypeUsuarioSchema";
 import TipoUsuario from "../../entities/tipoUsuario/TipoUsuario";
 import tipoUsuarioInterface, { propsTipoUsuario } from "../../entities/tipoUsuario/tipoUsuarioInterface";
 

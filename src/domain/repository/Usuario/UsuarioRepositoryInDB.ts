@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import UsuarioSchema from "../../../model/usuario/UsuarioSchema";
+import UsuarioSchema from "../../../model/UsuarioSchema";
 import Usuario from "../../entities/usuario/Usuario";
 import usuarioInterface, { propsUsuario } from "../../entities/usuario/usuarioInterface";
 
