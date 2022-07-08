@@ -1,5 +1,5 @@
 export type propsEvento = {
-    id?: String,
+    id: String,
     nome: String,
     descricao: String,
     dataInicio: Date,

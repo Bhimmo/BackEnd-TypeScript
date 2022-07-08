@@ -2,6 +2,7 @@ import crypto from "crypto";
 import statusEnum from "../../enum/statusEventoEnum";
 
 export default class Evento {
+    public id: string
     constructor(
         public nome: String,
         public descricao: String,
@@ -10,7 +11,7 @@ export default class Evento {
         public valor: Number,
         public statusId?: String,
         public enderecoId?: String,
-        public readonly id?: String,
+        id?: string,
     ) {
         this.id = id || crypto.randomUUID();
         this.statusId = statusId || statusEnum.PENDENTE;
