@@ -10,6 +10,7 @@ export type propsEvento = {
         descricao: String
     },
     endereco?: {
+        id: string,
         logradouro: String,
         bairro: String,
         numero: String,

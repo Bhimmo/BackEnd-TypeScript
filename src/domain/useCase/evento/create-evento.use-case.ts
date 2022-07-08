@@ -1,7 +1,9 @@
 import Evento from "../../entities/evento/Evento";
 import EventoRepositoryInDB from "../../repository/evento/EventoRepositoryInDB";
 import StatusEventoRepositoryInBD from "../../repository/statusEvento/StatusEventoRepositoryInBD";
+import EnderecoRepositoryInBD from "../../repository/endereco/EnderecoRepositoryInBD";
 import FindOneStatusEventoUseCase from "../statusEvento/findOne-statusEvento.use-case";
+import FindOneEnderecoUseCase from "../endereco/findOne-endereco.use-case";
 
 export default class CreateEventoUseCase {
     constructor(private eventoRepo: EventoRepositoryInDB) {}
@@ -13,7 +15,7 @@ export default class CreateEventoUseCase {
         dataFinal: any,
         valor: Number,
         statusId: string,
-        enderecoId: String
+        enderecoId: string
     ) {
         const evento = new Evento(
             nome,
@@ -25,12 +27,18 @@ export default class CreateEventoUseCase {
             enderecoId
         );
         
-        console.log(evento);
-        
         //Status
         const statusRepo = new StatusEventoRepositoryInBD();
         const statusUseCase = new FindOneStatusEventoUseCase(statusRepo);
         const status = await statusUseCase.execute(evento.statusId);
+
+        //Endereco
+        let endereco;
+        if (enderecoId) {
+            const enderecoRepo = new EnderecoRepositoryInBD();
+            const enderecoUseCase = new FindOneEnderecoUseCase(enderecoRepo);
+            endereco = await enderecoUseCase.execute(evento.enderecoId);
+        }
         
         //Create evento
         return this.eventoRepo.inserir({
@@ -43,7 +51,8 @@ export default class CreateEventoUseCase {
             status: {
                 id: status.id,
                 descricao: status.descricao
-            }
+            },
+            endereco: endereco
         })
     }
 }
