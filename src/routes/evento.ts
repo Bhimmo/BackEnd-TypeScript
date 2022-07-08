@@ -3,13 +3,15 @@ const router = express.Router();
 
 import EventoRepositoryInDB from "../domain/repository/evento/EventoRepositoryInDB";
 import CreateEventoUseCase from "../domain/useCase/evento/create-evento.use-case";
+import FindAllEventoUseCase from "../domain/useCase/evento/findAll-evento.use-case";
 
 const eventoRepo = new EventoRepositoryInDB();
 
-router.get('/', (req: Request, res: Response) => {
-    res.status(200).json({
-        return: "Parabens primeira rota do TCC"
-    })
+router.get('/', async (req: Request, res: Response) => {
+    const eventoUseCase = new FindAllEventoUseCase(eventoRepo);
+    const result = await eventoUseCase.execute();
+
+    res.status(200).json(result);
 })
 
 router.post('/', async (req: Request, res: Response) => {
@@ -31,7 +33,7 @@ router.post('/', async (req: Request, res: Response) => {
     const eventoUseCase = new CreateEventoUseCase(eventoRepo);
     const result = await eventoUseCase.execute(nome, descricao, dataInicio, dataFinal, valor, statusId, enderecoId);
     
-    res.status(200).json(result);
+    res.status(201).json(result);
 })
 
 export default router;

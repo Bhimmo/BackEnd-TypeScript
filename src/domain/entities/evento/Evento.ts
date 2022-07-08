@@ -2,14 +2,15 @@ import crypto from "crypto";
 import statusEnum from "../../enum/statusEventoEnum";
 
 export default class Evento {
-    public id: string
+    public id: string;
+    public statusId: string;
     constructor(
         public nome: String,
         public descricao: String,
         public dataInicio: Date,
         public dataFinal: Date,
         public valor: Number,
-        public statusId?: String,
+        statusId?: string,
         public enderecoId?: String,
         id?: string,
     ) {

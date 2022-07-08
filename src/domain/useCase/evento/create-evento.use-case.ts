@@ -12,7 +12,7 @@ export default class CreateEventoUseCase {
         dataInicio: any,
         dataFinal: any,
         valor: Number,
-        statusId: String,
+        statusId: string,
         enderecoId: String
     ) {
         const evento = new Evento(
@@ -25,11 +25,25 @@ export default class CreateEventoUseCase {
             enderecoId
         );
         
+        console.log(evento);
+        
         //Status
         const statusRepo = new StatusEventoRepositoryInBD();
         const statusUseCase = new FindOneStatusEventoUseCase(statusRepo);
         const status = await statusUseCase.execute(evento.statusId);
         
-        
+        //Create evento
+        return this.eventoRepo.inserir({
+            id: evento.id,
+            nome: evento.nome,
+            descricao: evento.descricao,
+            dataInicio: evento.dataInicio,
+            dataFinal: evento.dataFinal,
+            valor: evento.valor,
+            status: {
+                id: status.id,
+                descricao: status.descricao
+            }
+        })
     }
 }

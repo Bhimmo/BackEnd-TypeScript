@@ -26,10 +26,7 @@ describe('testing class Event', () => {
                 descricao: status.descricao
             }
         }
-        await banco.inserir(props);
-
-        console.log(banco.itens);
-        
+        await banco.inserir(props); 
         
         expect(banco.itens[0].status.descricao).toBe("nao iniciado");
     })
