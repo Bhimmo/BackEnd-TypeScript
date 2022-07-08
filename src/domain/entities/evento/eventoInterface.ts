@@ -23,4 +23,5 @@ export default interface eventoInterface {
     inserir(evento: propsEvento): Promise<void>
     pegarTodos(): Promise<propsEvento[]>
     pegarUm(id: string): Promise<propsEvento>
+    deletar(id: string): Promise<void>
 }

@@ -41,7 +41,7 @@ export default class CreateEventoUseCase {
         }
         
         //Create evento
-        return this.eventoRepo.inserir({
+        /* return this.eventoRepo.inserir({
             id: evento.id,
             nome: evento.nome,
             descricao: evento.descricao,
@@ -53,6 +53,6 @@ export default class CreateEventoUseCase {
                 descricao: status.descricao
             },
             endereco: endereco
-        })
+        }) */
     }
 }

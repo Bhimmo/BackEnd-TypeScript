@@ -29,4 +29,10 @@ export default class EventoRepositoryInDB implements eventoInterface {
             .findById(id)
             .then((res: any) => res)
     }
+
+    async deletar(id: string): Promise<void> {
+        return Schema
+            .deleteOne({id})
+            .then((res: any) => res)
+    }
 }
