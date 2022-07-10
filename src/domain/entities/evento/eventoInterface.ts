@@ -15,7 +15,7 @@ export type propsEvento = {
         bairro: String,
         numero: String,
         cep: String,
-        complemento: String
+        complemento?: String
     }
 }
 
