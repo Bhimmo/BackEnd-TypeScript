@@ -2,6 +2,7 @@ import express, {Request, Response} from "express";
 import EnderecoRepositoryInBD from "../domain/repository/endereco/EnderecoRepositoryInBD";
 const router = express.Router();
 import CreateEnderecoUseCase from "../domain/useCase/endereco/create-endereco.use-case";
+import FindAllEnderecoUseCase from "../domain/useCase/endereco/findAll-endereco.use-case";
 
 const enderecoRepo = new EnderecoRepositoryInBD();
 
@@ -15,6 +16,13 @@ router.post('/', async (req: Request, res: Response) => {
 
     const enderecoUseCase = new CreateEnderecoUseCase(enderecoRepo);
     const result = await enderecoUseCase.execute({logradouro, bairro, numero, cep, complemento});
+
+    res.status(201).json(result);
+})
+
+router.get('/', async (req: Request, res: Response) => {
+    const enderecoUseCase = new FindAllEnderecoUseCase(enderecoRepo);
+    const result = await enderecoUseCase.execute();
 
     res.status(200).json(result);
 })
