@@ -1,3 +1,4 @@
+import { propsStatusEvento } from './../../entities/statusEvento/statusEventoInterface';
 import mongoose from 'mongoose';
 import EventoSchemma from '../../../model/EventoSchemma';
 import eventoInterface, { propsEvento } from "../../entities/evento/eventoInterface";
@@ -34,5 +35,36 @@ export default class EventoRepositoryInDB implements eventoInterface {
         return Schema
             .deleteOne({id})
             .then((res: any) => res)
+    }
+
+    async atualizar(evento: propsEvento): Promise<void> {
+        return Schema
+            .findByIdAndUpdate({_id: evento.id}, {
+                $set: {
+                    nome: evento.nome,
+                    descricao: evento.descricao,
+                    dataInicio: evento.dataInicio,
+                    dataFinal: evento.dataFinal,
+                    valor: evento.valor,
+                    status: {
+                        _id: evento.status.id,
+                        descricao: evento.status.descricao
+                    },
+                    endereco: evento.endereco
+                }
+            })
+            .then((res: any) => res)
+    }
+
+    async atualizarStatus(id: string, status: propsStatusEvento): Promise<void> {
+        return Schema
+            .findByIdAndUpdate({_id: id}, {
+                $set: {
+                    status: {
+                        _id: status.id,
+                        descricao: status.descricao
+                    }
+                }
+            }).then((res: any) => res)
     }
 }

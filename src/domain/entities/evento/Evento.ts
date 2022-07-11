@@ -6,8 +6,8 @@ export default class Evento {
     public statusId: string;
     public enderecoId: string;
     constructor(
-        public nome: String,
-        public descricao: String,
+        public nome: string,
+        public descricao: string,
         public dataInicio: Date,
         public dataFinal: Date,
         public valor: Number,

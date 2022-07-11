@@ -30,4 +30,8 @@ describe('testing class Event', () => {
         
         expect(banco.itens[0].status.descricao).toBe("nao iniciado");
     })
+
+    it('atualizando evento', () => {
+        
+    })
 })

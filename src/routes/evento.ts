@@ -6,6 +6,7 @@ import CreateEventoUseCase from "../domain/useCase/evento/create-evento.use-case
 import FindAllEventoUseCase from "../domain/useCase/evento/findAll-evento.use-case";
 import FindOneEventoUseCase from "../domain/useCase/evento/findOne-evento.use-case";
 import DeleteEventoUseCase from "../domain/useCase/evento/delete-evento.use-case";
+import AtualizarEventoUseCase from "../domain/useCase/evento/update-evento.use-case";
 
 const eventoRepo = new EventoRepositoryInDB();
 
@@ -64,6 +65,33 @@ router.delete('/:id', async (req: Request, res: Response) => {
     await eventoUseCase.execute(id);
 
     res.status(204).json();
+})
+
+router.patch('/:id', async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const {
+        nome,
+        descricao,
+        dataInicio,
+        dataFinal,
+        valor,
+        statusId,
+        enderecoId
+    } = req.body;
+
+    if (!req.body || !id) {
+        res.status(500).json({Error: "Dados incorretos"});
+        return false;
+    }
+
+    try {
+        const eventoUseCase = new AtualizarEventoUseCase(eventoRepo);
+        const result = await eventoUseCase.execute(id, req.body);
+    
+        res.status(200).json(result);
+    } catch (e: any) {
+        res.status(500).json({Error: e.message})
+    }
 })
 
 export default router;

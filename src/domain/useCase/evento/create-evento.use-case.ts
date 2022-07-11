@@ -9,8 +9,8 @@ export default class CreateEventoUseCase {
     constructor(private eventoRepo: EventoRepositoryInDB) {}
 
     async execute(
-        nome: String,
-        descricao: String,
+        nome: string,
+        descricao: string,
         dataInicio: any,
         dataFinal: any,
         valor: Number,
