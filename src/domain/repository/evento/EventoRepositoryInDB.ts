@@ -55,16 +55,4 @@ export default class EventoRepositoryInDB implements eventoInterface {
             })
             .then((res: any) => res)
     }
-
-    async atualizarStatus(id: string, status: propsStatusEvento): Promise<void> {
-        return Schema
-            .findByIdAndUpdate({_id: id}, {
-                $set: {
-                    status: {
-                        _id: status.id,
-                        descricao: status.descricao
-                    }
-                }
-            }).then((res: any) => res)
-    }
 }

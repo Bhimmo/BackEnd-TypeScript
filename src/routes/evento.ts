@@ -79,7 +79,7 @@ router.patch('/:id', async (req: Request, res: Response) => {
         enderecoId
     } = req.body;
 
-    if (!req.body || !id) {
+    if (!nome || !id || !statusId) {
         res.status(500).json({Error: "Dados incorretos"});
         return false;
     }

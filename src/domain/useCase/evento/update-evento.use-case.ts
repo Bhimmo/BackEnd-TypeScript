@@ -4,7 +4,6 @@ import EventoRepositoryInDB from "../../repository/evento/EventoRepositoryInDB";
 import StatusEventoRepositoryInBD from "../../repository/statusEvento/StatusEventoRepositoryInBD";
 import FindOneEnderecoUseCase from "../endereco/findOne-endereco.use-case";
 import FindOneStatusEventoUseCase from "../statusEvento/findOne-statusEvento.use-case";
-import UpdateStatusEventoUseCase from "./updateStatus-evento.use-case";
 
 type propsEvento = {
     nome: string,
@@ -27,40 +26,32 @@ export default class UpdateEventoUseCase {
         }
 
         //status
-        const statusUpdateUseCase = new UpdateStatusEventoUseCase(this.eventoRepo);
-        const statusVerify = await statusUpdateUseCase.execute(eventoSelect, props.statusId);
         const statusRepo = new StatusEventoRepositoryInBD();
         const statusUseCase = new FindOneStatusEventoUseCase(statusRepo);
-        const status = await statusUseCase.execute(statusVerify);
+        const status = await statusUseCase.execute(props.statusId);
+        if (!status) {
+            throw new Error("Status nao encontrado");
+        }
 
         //endereco
         let endereco;
         if (props.enderecoId) {
             const enderecoRepo = new EnderecoRepositoryInBD();
             const enderecoUseCase = new FindOneEnderecoUseCase(enderecoRepo);
-            const endereco = await enderecoUseCase.execute(props.enderecoId);
+            endereco = await enderecoUseCase.execute(props.enderecoId);
+            
         }
 
-        const evento = new Evento(
-            props.nome, 
-            props.descricao, 
-            props.dataInicio, 
-            props.dataFinal, 
-            props.valor, 
-            props.statusId, 
-            props.enderecoId
-        );
-
         const eventoAtu = {
-            id: eventoSelect.id || evento.id,
-            nome: evento.nome || eventoSelect.nome,
-            descricao: evento.descricao || eventoSelect.descricao,
-            dataInicio: evento.dataInicio || eventoSelect.dataInicio,
-            dataFinal: evento.dataFinal || eventoSelect.dataFinal,
-            valor: evento.valor || eventoSelect.valor,
+            id: eventoSelect.id,
+            nome: props.nome || eventoSelect.nome,
+            descricao: props.descricao || eventoSelect.descricao,
+            dataInicio: props.dataInicio || eventoSelect.dataInicio,
+            dataFinal: props.dataFinal || eventoSelect.dataFinal,
+            valor: props.valor || eventoSelect.valor,
             status: {
-                id: status.id || eventoSelect.status.id,
-                descricao: status.descricao || eventoSelect.status.descricao
+                id: status.id,
+                descricao: status.descricao
             },
             endereco: endereco
         }

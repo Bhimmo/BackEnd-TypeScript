@@ -27,5 +27,4 @@ export default interface eventoInterface {
     pegarUm(id: string): Promise<propsEvento>
     deletar(id: string): Promise<void>
     atualizar(evento: propsEvento): Promise<void>
-    atualizarStatus(id: string, status: propsStatusEvento): Promise<void>
 }
