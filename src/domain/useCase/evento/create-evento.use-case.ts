@@ -52,7 +52,8 @@ export default class CreateEventoUseCase {
                 id: status.id,
                 descricao: status.descricao
             },
-            endereco: endereco
+            endereco: endereco,
+            ativo: evento.ativo
         })
     }
 }

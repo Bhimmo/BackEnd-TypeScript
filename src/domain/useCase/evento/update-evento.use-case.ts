@@ -12,7 +12,8 @@ type propsEvento = {
     dataFinal: Date,
     valor: Number,
     statusId: string,
-    enderecoId: string
+    enderecoId: string,
+    ativo: Boolean
 }
 
 export default class UpdateEventoUseCase {
@@ -53,7 +54,9 @@ export default class UpdateEventoUseCase {
                 id: status.id,
                 descricao: status.descricao
             },
-            endereco: endereco
+            endereco: endereco,
+            ativo: props.ativo || eventoSelect.ativo
+
         }
 
         await this.eventoRepo.atualizar(eventoAtu);

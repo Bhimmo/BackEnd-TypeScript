@@ -18,7 +18,8 @@ export type propsEvento = {
         numero: String,
         cep: String,
         complemento?: String
-    }
+    },
+    ativo: Boolean
 }
 
 export default interface eventoInterface {

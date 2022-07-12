@@ -17,7 +17,8 @@ export default class EventoRepositoryInDB implements eventoInterface {
                 _id: evento.status.id,
                 descricao: evento.status.descricao
             },
-            endereco: evento.endereco
+            endereco: evento.endereco,
+            ativo: evento.ativo
         }).save().then((res: any) => res)
     }
 
@@ -50,7 +51,8 @@ export default class EventoRepositoryInDB implements eventoInterface {
                         _id: evento.status.id,
                         descricao: evento.status.descricao
                     },
-                    endereco: evento.endereco
+                    endereco: evento.endereco,
+                    ativo: evento.ativo
                 }
             })
             .then((res: any) => res)

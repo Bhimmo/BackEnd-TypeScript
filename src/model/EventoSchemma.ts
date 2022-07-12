@@ -26,5 +26,9 @@ export default new Schema({
         type: EnderecoSchemma,
         required: false,
         default: null
+    },
+    ativo: {
+        type: Boolean,
+        required: true
     }
 })
