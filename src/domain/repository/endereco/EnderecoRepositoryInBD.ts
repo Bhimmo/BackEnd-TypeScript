@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 import EnderecoSchemma from "../../../model/EnderecoSchemma";
-import { propsEnd } from "../../entities/endereco/enderecoInterface";
+import enderecoInterface, { propsEnd } from "../../entities/endereco/enderecoInterface";
 
 const Schema = mongoose.model('Endereco', EnderecoSchemma);
 
-export default class EnderecoRepositoryInBD {
+export default class EnderecoRepositoryInBD implements enderecoInterface{
     async pegarTodos(): Promise<propsEnd[]> {
         return Schema
             .find()
@@ -26,5 +26,16 @@ export default class EnderecoRepositoryInBD {
             cep: props.cep,
             complemento: props.complemento
         }).save().then((res: any) => res)
+    }
+
+    async atualizar(props: propsEnd): Promise<void> {
+        return Schema
+            .findByIdAndUpdate({_id: props.id}, {
+                logradouro: props.logradouro,
+                bairro: props.bairro,
+                numero: props.numero,
+                cep: props.cep,
+                complemento: props.complemento
+            }).then((res: any) => res);
     }
 }

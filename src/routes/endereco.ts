@@ -3,6 +3,7 @@ import EnderecoRepositoryInBD from "../domain/repository/endereco/EnderecoReposi
 const router = express.Router();
 import CreateEnderecoUseCase from "../domain/useCase/endereco/create-endereco.use-case";
 import FindAllEnderecoUseCase from "../domain/useCase/endereco/findAll-endereco.use-case";
+import UpdateEnderecoUseCase from "../domain/useCase/endereco/update-endereco.use-case";
 
 const enderecoRepo = new EnderecoRepositoryInBD();
 
@@ -23,6 +24,20 @@ router.post('/', async (req: Request, res: Response) => {
 router.get('/', async (req: Request, res: Response) => {
     const enderecoUseCase = new FindAllEnderecoUseCase(enderecoRepo);
     const result = await enderecoUseCase.execute();
+
+    res.status(200).json(result);
+})
+
+router.patch('/:id', async (req: Request, res: Response) => {
+    const { id } = req.params;
+    
+    if (!req.body || !id) {
+        res.status(500).json({Error: "dados invalidos"});
+        return false;
+    }
+
+    const enderecoUseCase = new UpdateEnderecoUseCase(enderecoRepo);
+    const result = await enderecoUseCase.execute(id, req.body);
 
     res.status(200).json(result);
 })
